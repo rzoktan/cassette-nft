@@ -6,7 +6,7 @@
 // global scope, and execute the script.
 const hre = require("hardhat");
 
-const numTokensToMint = 1000;
+const numTokensToMint = 5200;
 
 async function main() {
   const [deployer] = await hre.ethers.getSigners();
@@ -24,7 +24,9 @@ async function main() {
     const mintTx = await nft.mintMulti(deployer.address, numTokensToMint);
     const receipt = await mintTx.wait();
 
-    console.log(`Minted ${numTokensToMint} tokens for ${deployer.address}, txHash: ${receipt.transactionHash}`)
+    console.log(
+      `Minted ${numTokensToMint} tokens for ${deployer.address}, txHash: ${receipt.transactionHash}`
+    );
   }
 
   console.log("Contract deployment finished");

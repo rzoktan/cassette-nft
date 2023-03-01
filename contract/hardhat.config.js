@@ -27,27 +27,34 @@ const networks = {
   },
 
   /** public testnets */
-  rinkeby: { // eth testnet (deprecated)
+  rinkeby: {
+    // eth testnet (deprecated)
     chainId: 4,
     url: "https://rpc.ankr.com/eth_rinkeby",
     accounts,
   },
-  goerli: { // eth testnet
+  goerli: {
+    // eth testnet
     chainId: 5,
     url: "https://rpc.ankr.com/eth_goerli",
     accounts,
+    // gas: 400000000,
+    // gasPrice: 8000000000,
   },
-  mumbai: { // polygon testnet
+  mumbai: {
+    // polygon testnet
     chainId: 80001,
     url: "https://rpc.ankr.com/polygon_mumbai",
     accounts,
   },
-  fuji: { // avalanche testnet
+  fuji: {
+    // avalanche testnet
     chainId: 43113,
     url: "https://rpc.ankr.com/avalanche_fuji",
     accounts,
   },
-  chapel: { // bsc testnet
+  chapel: {
+    // bsc testnet
     chainId: 97,
     url: "https://rpc.ankr.com/bsc_testnet_chapel",
     accounts,
@@ -76,7 +83,6 @@ const networks = {
   },
 };
 
-
 /** @type import('hardhat/config').HardhatUserConfig */
 module.exports = {
   solidity: "0.8.9",
@@ -86,7 +92,7 @@ module.exports = {
     },
     optimizer: {
       enabled: true,
-      runs: 10000
+      runs: 10000,
     },
   },
   gasReporter: {

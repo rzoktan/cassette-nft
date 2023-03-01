@@ -62,10 +62,11 @@ export const renderHtml = (id) => {
   const attributes = getJsonAttributes(id)
   let gameParams
   const paramTransformationRules = {
-    'Snake Color': 'snakeColor',
-    'Background Color': 'backgroundColor',
-    'Food Color': 'foodColor',
-    'Game Difficulty': 'speed',
+    'Background Color': 'background',
+    'Body Frame': 'body',
+    'Content Paper': 'contentPaper',
+    'Lines': 'lines',
+    'Genres': 'genres',
   }
 
   if (attributes) {

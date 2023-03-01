@@ -1,11 +1,12 @@
 {
-  "name": "snakes-on-chain",
+  "name": "cassette-nft",
   "version": "1.00",
   "description": "interactive nft demo",
   "main": "index.js",
   "author": "Martin Kainzbauer <m.kainzbauer@deptagency.com>",
   "license": "MIT",
   "type": "module",
+  "private": true,
   "scripts": {
     "dev": "node index.js",
     "start": "cross-env NODE_ENV=production node index.js",

@@ -6,12 +6,7 @@ import "@openzeppelin/contracts/access/AccessControl.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 
-
-contract NFT is
-    ERC721Royalty,
-    AccessControl,
-    Ownable
-{
+contract NFT is ERC721Royalty, AccessControl, Ownable {
     // libs
     using Strings for uint256;
     using Counters for Counters.Counter;
@@ -20,11 +15,10 @@ contract NFT is
     Counters.Counter private _tokenIdTracker;
     bytes32 public constant MINTER_ROLE = keccak256("MINTER_ROLE");
 
-
     /**
      * @dev Constructor
      */
-    constructor() ERC721("Snakes on a chain", "SNAKE") {
+    constructor() ERC721("Cassette NFT", "Cassette") {
         // give deployer admin- and minter-roles
         _setupRole(DEFAULT_ADMIN_ROLE, _msgSender());
         _setupRole(MINTER_ROLE, _msgSender());
@@ -32,17 +26,21 @@ contract NFT is
         _setDefaultRoyalty(_msgSender(), 200); // 2%
     }
 
-
     /** Public getters */
 
     /**
      * @dev See {IERC721Metadata-tokenURI}. Override attaches ".json" extension to URI.
      */
-    function tokenURI(uint256 tokenId) public view virtual override returns (string memory) {
+    function tokenURI(
+        uint256 tokenId
+    ) public view virtual override returns (string memory) {
         _requireMinted(tokenId);
 
         string memory baseURI = _baseURI();
-        return bytes(baseURI).length > 0 ? string(abi.encodePacked(baseURI, tokenId.toString(), ".json")) : "";
+        return
+            bytes(baseURI).length > 0
+                ? string(abi.encodePacked(baseURI, tokenId.toString(), ".json"))
+                : "";
     }
 
     /**
@@ -50,17 +48,26 @@ contract NFT is
      */
     function contractURI() external view virtual returns (string memory) {
         string memory baseURI = _baseURI();
-        return bytes(baseURI).length > 0 ? string(abi.encodePacked(_baseURI(), "contract.json")) : "";
+        return
+            bytes(baseURI).length > 0
+                ? string(abi.encodePacked(_baseURI(), "contract.json"))
+                : "";
     }
 
     /**
      * @dev See {IERC165-supportsInterface} - override required by Solidity.
      */
-    function supportsInterface(bytes4 interfaceId) public view virtual
-        override(ERC721Royalty, AccessControl) returns (bool) {
+    function supportsInterface(
+        bytes4 interfaceId
+    )
+        public
+        view
+        virtual
+        override(ERC721Royalty, AccessControl)
+        returns (bool)
+    {
         return super.supportsInterface(interfaceId);
     }
-
 
     /** Public setters */
 
@@ -77,7 +84,10 @@ contract NFT is
      */
     function burn(uint256 tokenId) public virtual {
         //solhint-disable-next-line max-line-length
-        require(_isApprovedOrOwner(_msgSender(), tokenId), "ERC721: caller is not token owner nor approved");
+        require(
+            _isApprovedOrOwner(_msgSender(), tokenId),
+            "ERC721: caller is not token owner nor approved"
+        );
         _burn(tokenId);
     }
 
@@ -102,12 +112,15 @@ contract NFT is
     /**
      * @dev Multi-Transfer.
      */
-    function transferMulti(address from, address to, uint256[] memory tokenIds) public virtual {
+    function transferMulti(
+        address from,
+        address to,
+        uint256[] memory tokenIds
+    ) public virtual {
         for (uint16 i = 0; i < tokenIds.length; i++) {
             safeTransferFrom(from, to, tokenIds[i], "");
         }
     }
-
 
     /** Internal methods */
 
@@ -116,6 +129,6 @@ contract NFT is
      * token will be the concatenation of the `baseURI` and the `tokenId`.
      */
     function _baseURI() internal view virtual override returns (string memory) {
-        return "https://snakes.connectednft.art/token/";
+        return "https://cassettenft.art";
     }
 }
