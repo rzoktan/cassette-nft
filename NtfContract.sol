@@ -3,7 +3,7 @@
 /*
 * file      : NtfContract.sol
 * package   : contracts
-* author    : altair-decoder
+* author    : altair-decoder.
 */
 
 
